@@ -2,6 +2,11 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+#include "coro.h"
+
+// shut up syntastic
+#define coro_transfer coro_transfer
+
 /**
  * Output formatted info
  */
@@ -25,5 +30,14 @@
  */
 
 #define enter(from, to) coro_transfer(&from, &to)
+
+/**
+ * Initialize a new routine in block from name
+ */
+
+#define co(name, body) static void name (void *__data) {                       \
+  body                                                                         \
+  enter(ctx.name, ctx.root);                                                   \
+}
 
 #endif
