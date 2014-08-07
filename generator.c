@@ -29,10 +29,12 @@ co(gen, {
   info("in routine");
 });
 
+/**
+ * `main'
+ */
+
 int
 main (void) {
-  char ptr[1024];
-
   // create root context with no routine, arg, or data
   info("ctx(root)");
   coro_create(&ctx.root, NULL, NULL, NULL, 0);
